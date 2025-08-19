@@ -1,5 +1,12 @@
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 <x-layouts.app :title="__('Dashboard')">
+    
+    @canRole('USER')
+        <livewire:notif-badge />
+    {{-- livewire popup snk --}}
+        @livewire('terms-popup')
+    @endcanRole
+
     <div class="flex h-full w-full flex-1 flex-col gap-4 rounded-xl">
         
         @if (session('success'))
