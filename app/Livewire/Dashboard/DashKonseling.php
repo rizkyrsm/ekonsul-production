@@ -79,12 +79,15 @@ class DashKonseling extends Component
             ]
         );
 
+        // Ambil data order
+        $konseling = Order::findOrFail($id_order);
+
         // Notifikasi ke User
         Notif::create([
             'keterangan'   => 'Konsultasi Diselesaikan #' . $id_order . ', Terimakasih ',
             'id_order'     => $id_order,
             'role'         => 'USER',
-            'id_penerima'  => $konseling->id_user ?? null,
+            'id_penerima'  => $konseling->id_user, // sudah tidak null
             'status'       => 'terkirim',
         ]);
 
@@ -99,6 +102,7 @@ class DashKonseling extends Component
 
         return back()->with('success', 'Rangkuman & Saran berhasil disimpan.');
     }
+
 
     /**
      * Update status konsultasi menjadi SELESAI
@@ -174,13 +178,12 @@ class DashKonseling extends Component
             $penilaian = $penilaianList->firstWhere('id_order', $konseling->id_order);
 
             if ($penilaian) {
-                    $this->nilaiPenilaian[$konseling->id_order] = $penilaian->nilai;
-                    $bisaUpdate[$konseling->id_order] = $penilaian->created_at->gte(now()->subDays(3));
-                } else {
-                    $this->nilaiPenilaian[$konseling->id_order] = 0;
-                    $bisaUpdate[$konseling->id_order] = true;
-                }
-
+                $this->nilaiPenilaian[$konseling->id_order] = $penilaian->nilai;
+                $bisaUpdate[$konseling->id_order] = $penilaian->created_at->gte(now()->subDays(3));
+            } else {
+                $this->nilaiPenilaian[$konseling->id_order] = 0;
+                $bisaUpdate[$konseling->id_order] = true;
+            }
         }
 
         return view('livewire.dashboard.Konseling', [
