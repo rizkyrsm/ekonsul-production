@@ -28,7 +28,11 @@
 
 
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    @canRole('KONSELOR')
+                        <flux:navlist.item icon="chart-bar" :href="route('dashboard.report-order')" wire:navigate>Tarik Data </flux:navlist.item>
+                    @endcanRole
                     @canRole('ADMIN','CABANG')
+                        <flux:navlist.item icon="chart-bar" :href="route('dashboard.report-order')" wire:navigate>Tarik Data </flux:navlist.item>
                         <flux:navlist.item icon="user-group" :href="route('dashboard.users.create')" wire:navigate> {{ __('Manajemen User') }}</flux:navlist.item>
                     @endcanRole
                     @canRole('ADMIN') 
@@ -42,7 +46,6 @@
                     @endcanRole
                     <flux:navlist.item icon="chat-bubble-left-right" :href="route('konseling')" wire:navigate> {{ __('History Konseling') }}</flux:navlist.item>
                     
-
            
                 </flux:navlist.group>
             </flux:navlist>

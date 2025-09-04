@@ -11,6 +11,8 @@ use App\Livewire\Dashboard\DiskonCreate;
 use App\Livewire\Dashboard\DashKeranjang;
 use App\Livewire\Dashboard\DashKonseling;
 use App\Livewire\Dashboard\DashOrder;
+use App\Livewire\Dashboard\ReportOrder;
+use App\Http\Controllers\ReportOrderExportController;
 use App\Http\Controllers\ExtendedMessageController;
 use App\Http\Controllers\UserMessageController;
 use App\Models\User;
@@ -30,6 +32,14 @@ Route::get('/dashboard', [DashController::class, 'index'])
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+    // Report Order Selesai (Livewire)
+    Route::get('/dashboard/report-order', ReportOrder::class)
+        ->name('dashboard.report-order');
+
+    // Export Excel Report Order
+    Route::get('/dashboard/report-order/export', [ReportOrderExportController::class, 'export'])
+        ->name('dashboard.report-order.export');
+
 
     // popup rangkuman
     Route::get('/konseling/rangkuman/{id_order}', [DashKonseling::class, 'getRangkuman'])
