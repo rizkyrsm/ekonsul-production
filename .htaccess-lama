@@ -19,11 +19,16 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
-    # Jika file atau folder tidak ada, arahkan ke index.php
+    # Send Requests To Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
 
-    # Izinkan akses ke /storage
+    # Allow access to /storage
     RewriteRule ^storage/(.*)$ storage/$1 [L,NC]
+    
+   
+    
+    # Jika tidak ada, redirect ke folder public
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>

@@ -1,4 +1,6 @@
 <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
 <x-layouts.app :title="__('Dashboard')">
     
     @canRole('USER')
@@ -212,8 +214,12 @@
                     });
             }
         </script>
-    {{-- AKHIR CEK DETAIL --}}
-
 </x-layouts.app>
+
+    {{-- AKHIR CEK DETAIL --}}
+    <script type="module" src="/firebase.js"></script>
+    
+    
+
 
 
