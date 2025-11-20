@@ -61,7 +61,7 @@
             @endforeach
 
             <!-- Metode Pembayaran -->
-            <div class="rounded-lg shadow-md bg-white p-4 hover:shadow-lg transition border border-blue-500">
+            <div class="rounded-lg shadow-md bg-white p-4 hover:shadow-lg transition border border-blue-500" style="display:none;">
                 <h3 class="text-lg font-semibold text-gray-800">Metode Pembayaran</h3>
                 <div class="flex items-center space-x-4">
                     <!-- Bank Mandiri -->
